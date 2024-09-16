@@ -1,0 +1,9 @@
+Sync:
+  handler: src/functions/syncClickupJira.handler
+  description: syncer
+  timeout: 900
+  memorySize: 1024
+  maximumRetryAttempts: 0
+  events:
+    - eventBridge:
+        schedule: rate(10 minutes)

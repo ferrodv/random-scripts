@@ -1,0 +1,27 @@
+# package directories
+node_modules
+jspm_packages
+package-lock.json
+yarn.lock
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+.webpackCache
+
+# jest coverage
+coverage
+
+# dotenv
+.env
+
+# docker-compose
+docker-compose.yml
+
+# auto
+.DS_Store
+
+# generatedMocks
+/src/mocks/workosUsers*.json

@@ -1,0 +1,45 @@
+service: pmt-syncer
+frameworkVersion: "3"
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+useDotenv: true
+provider:
+  name: aws
+  region: eu-west-1
+  runtime: nodejs16.x
+  memorySize: 512
+  timeout: 60
+  stage: ${self:custom.stage}
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+    STAGE: ${env:NODE_ENV, 'development'}
+    CLICKUP_ADMIN_KEY: ${env:CLICKUP_ADMIN_KEY, 'token'}
+    CLICKUP_TEAM: ${env:CLICKUP_TEAM, 'Org'}
+    CLICKUP_TEAM_ID: ${env:CLICKUP_TEAM_ID, 'MoonshotId'}
+    JIRA_API_ENDPOINT: ${env:JIRA_API_ENDPOINT, 'https://org.atlassian.net'}
+    JIRA_ADMIN_EMAIL: ${env:JIRA_ADMIN_EMAIL, 'email@org.com'}
+    JIRA_ADMIN_KEY: ${env:JIRA_ADMIN_KEY, 'token'}
+    REGION: ${env:REGION, 'eu-west-1'}
+    SERVICE_NAME: pmt-syncer
+    SENTRY_DSN: ${env:SENTRY_DSN}
+    TRACES_SAMPLE_RATE: ${env:TRACES_SAMPLE_RATE}
+
+custom:
+  serverless-offline:
+    httpPort: 5000
+    websocketPort: 5001
+    lambdaPort: 5002
+  functionsFile: ${env:FUNCTIONSFILE, 'local'}
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  serviceName: pmtsyncer
+  stage: ${env:NODE_ENV, 'development'}
+
+functions: ${file(./serverlessFunctions/${self:custom.functionsFile}.yaml)}

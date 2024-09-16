@@ -1,0 +1,52 @@
+name: deploy_lambdas
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_lambdas:
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      matrix:
+        node_version:
+          - 16
+    env:
+      CLICKUP_ADMIN_KEY: ${{ secrets.CLICKUP_ADMIN_KEY }}
+      CLICKUP_TEAM: ${{ vars.CLICKUP_TEAM }}
+      CLICKUP_TEAM_ID: ${{ vars.CLICKUP_TEAM_ID }}
+      JIRA_API_ENDPOINT: ${{ vars.JIRA_API_ENDPOINT }}
+      JIRA_ADMIN_EMAIL: ${{ vars.JIRA_ADMIN_EMAIL }}
+      JIRA_ADMIN_KEY: ${{ secrets.JIRA_ADMIN_KEY }}
+      FUNCTIONSFILE: "cloud"
+      REGION: ${{ vars.REGION }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      TRACES_SAMPLE_RATE: ${{ vars.TRACES_SAMPLE_RATE }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        id: aws-credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::128175010820:role/moonshot-github-oidc
+          aws-region: eu-west-1
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Deploy to lambda
+        run: yarn deploy
+    
