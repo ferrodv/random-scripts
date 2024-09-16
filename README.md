@@ -63,7 +63,7 @@ Which should result in response similar to the following:
 You can invoke your function locally by using the following command:
 
 ```bash
-NODE_ENV=development FUNCTIONSFILE=local serverless invoke local --function HealthCheck
+NODE_ENV=dev FUNCTIONSFILE=local serverless invoke local --function HealthCheck
 ```
 
 Which should result in response similar to the following:

@@ -1,13 +1,13 @@
 {
-  "name": "pmt-syncer",
+  "name": "random-scripts",
   "version": "1.0.0",
   "main": "handler.js",
-  "description": "Mini app that syncs card from Jira to Clickup",
+  "description": "Weird app that run specific scripts",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development FUNCTIONSFILE=local serverless offline --noTimeout",
-    "start:prod": "NODE_ENV=production FUNCTIONSFILE=cloud serverless offline",
-    "deploy": "NODE_ENV=production serverless deploy",
+    "start": "NODE_ENV=dev FUNCTIONSFILE=local serverless offline --noTimeout",
+    "start:prod": "NODE_ENV=prod FUNCTIONSFILE=cloud serverless offline",
+    "deploy": "NODE_ENV=prod serverless deploy",
     "test": "NODE_ENV=test jest --verbose --silent --detectOpenHandles --forceExit",
     "test:long": "NODE_ENV=test jest --verbose --detectOpenHandles --forceExit --testTimeout 100000",
     "linter": "eslint ./src",
@@ -40,6 +40,10 @@
   },
   "dependencies": {
     "axios": "^1.3.6",
-    "dotenv": "^16.0.3"
-  }
+    "dotenv": "^16.0.3",
+    "punycode": "^2.3.1"
+  },
+  "repository": "https://github.com/ferrodv/random-scripts.git",
+  "author": "Fercho <ferdy.rod23@gmail.com>",
+  "private": false
 }

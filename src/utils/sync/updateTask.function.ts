@@ -1,5 +1,5 @@
 import { clickupCustomFieldsIds } from "./constants";
-import ClickupTasks from "../services/clickup/modules/tasks.clickup";
+import ClickupTasks from "../../services/clickup/modules/tasks.clickup";
 
 export default async (
   clickupTask: any,

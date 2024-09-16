@@ -18,7 +18,7 @@ provider:
   stage: ${self:custom.stage}
   environment:
     NODE_ENV: ${env:NODE_ENV}
-    STAGE: ${env:NODE_ENV, 'development'}
+    STAGE: ${env:NODE_ENV, 'dev'}
     CLICKUP_ADMIN_KEY: ${env:CLICKUP_ADMIN_KEY, 'token'}
     CLICKUP_TEAM: ${env:CLICKUP_TEAM, 'Org'}
     CLICKUP_TEAM_ID: ${env:CLICKUP_TEAM_ID, 'MoonshotId'}
@@ -40,6 +40,6 @@ custom:
     webpackConfig: ./webpack.config.js
     includeModules: true
   serviceName: pmtsyncer
-  stage: ${env:NODE_ENV, 'development'}
+  stage: ${env:NODE_ENV, 'dev'}
 
 functions: ${file(./serverlessFunctions/${self:custom.functionsFile}.yaml)}

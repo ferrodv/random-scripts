@@ -1,6 +1,6 @@
 import config from "../config";
 import response from "../utils/response";
-import { jiraClickupMapper } from "../utils/constants";
+import { jiraClickupMapper } from "../utils/sync/constants";
 import JiraProjects from "../services/jira/modules/projects.jira";
 import JiraIssues from "../services/jira/modules/issues.jira";
 import ClickupTeams from "../services/clickup/modules/teams.clickup";

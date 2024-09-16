@@ -2,8 +2,8 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 const config = {
-  dev: process.env.NODE_ENV === "development",
-  prod: process.env.NODE_ENV === "production",
+  dev: process.env.NODE_ENV === "dev",
+  prod: process.env.NODE_ENV === "prod",
   test: process.env.NODE_ENV === "test",
   enviroment: process.env.NODE_ENV,
   clickupAdminKey: process.env.CLICKUP_ADMIN_KEY,

@@ -1,5 +1,5 @@
 import config from "../../config";
-import { clickupCustomFieldsIds, priorityMapper } from "../constants";
+import { clickupCustomFieldsIds, priorityMapper } from "./constants";
 
 const getSprintNumber = (sprintName: string): number | null => {
   const num = sprintName.match(/\d/g);
