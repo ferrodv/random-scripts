@@ -16,3 +16,21 @@ Sync:
         method: get
         path: /sync
         cors: true
+
+CreatePhone:
+  handler: src/functions/vapiSetPhones.handler
+  name: creater
+  events:
+    - http:
+        method: post
+        path: /createPhone
+        cors: true
+
+Playground:
+  handler: src/functions/playground.handler
+  name: player
+  events:
+    - http:
+        method: post
+        path: /playground
+        cors: true

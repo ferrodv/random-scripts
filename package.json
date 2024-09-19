@@ -5,7 +5,7 @@
   "description": "Weird app that run specific scripts",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=dev FUNCTIONSFILE=local serverless offline --noTimeout",
+    "start": "NODE_ENV=dev FUNCTIONSFILE=local nodemon --exec serverless offline --noTimeout",
     "start:prod": "NODE_ENV=prod FUNCTIONSFILE=cloud serverless offline",
     "deploy": "NODE_ENV=prod serverless deploy",
     "test": "NODE_ENV=test jest --verbose --silent --detectOpenHandles --forceExit",
