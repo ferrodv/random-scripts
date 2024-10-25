@@ -7,6 +7,15 @@ HealthCheck:
         path: /
         cors: true
 
+Playground:
+  handler: src/functions/playground.handler
+  name: player
+  events:
+    - http:
+        method: post
+        path: /playground
+        cors: true
+
 Sync:
   handler: src/functions/syncClickupJira.handler
   name: syncer
@@ -17,20 +26,29 @@ Sync:
         path: /sync
         cors: true
 
-CreatePhone:
+CreateVapiPhone:
   handler: src/functions/vapiSetPhones.handler
-  name: creater
+  name: vapiCreater
   events:
     - http:
         method: post
-        path: /createPhone
+        path: /createVapiPhone
         cors: true
 
-Playground:
-  handler: src/functions/playground.handler
-  name: player
+DeleteVapiPhone:
+  handler: src/functions/vapiDeleteAllPhones.handler
+  name: vapiDeleter
   events:
     - http:
         method: post
-        path: /playground
+        path: /deleteVapiPhones
+        cors: true
+
+DeleteTwilioPhone:
+  handler: src/functions/twilioDeleteAllPhones.handler
+  name: twilioDeleter
+  events:
+    - http:
+        method: post
+        path: /deleteTwilioPhones
         cors: true
