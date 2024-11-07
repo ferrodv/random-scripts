@@ -20,7 +20,7 @@ Sync:
   handler: src/functions/syncClickupJira.handler
   name: syncer
   events:
-    - schedule: rate(2 hours)
+    # - schedule: rate(2 hours)
     - http:
         method: get
         path: /sync
