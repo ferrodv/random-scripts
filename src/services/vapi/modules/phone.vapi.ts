@@ -1,11 +1,7 @@
 import apiVapi from "../config/api.vapi";
 
 export default class VapiPhone {
-
-  static async GetAllPhones(
-    vapiKey: string,
-    tries = 0
-  ): Promise<any> {
+  static async GetAllPhones(vapiKey: string, tries = 0): Promise<any> {
     if (tries >= 3) {
       console.log("Could not Get Phone Numbers");
       return null;
@@ -16,10 +12,7 @@ export default class VapiPhone {
           Authorization: `Bearer ${vapiKey}`,
         },
       };
-      const response = await apiVapi.get(
-        `/phone-number`,
-        config,
-      );
+      const response = await apiVapi.get(`/phone-number`, config);
 
       return response.data;
     } catch (error) {
@@ -52,13 +45,9 @@ export default class VapiPhone {
         number: phoneNumber,
         twilioAccountSid,
         twilioAuthToken,
-        name: friendlyName
+        name: friendlyName,
       };
-      const response = await apiVapi.post(
-        `/phone-number`,
-        body,
-        config,
-      );
+      const response = await apiVapi.post(`/phone-number`, body, config);
 
       return response.data;
     } catch (error) {
@@ -82,10 +71,7 @@ export default class VapiPhone {
           Authorization: `Bearer ${vapiKey}`,
         },
       };
-      const response = await apiVapi.delete(
-        `/phone-number/${phoneId}`,
-        config,
-      );
+      const response = await apiVapi.delete(`/phone-number/${phoneId}`, config);
 
       return response.data;
     } catch (error) {

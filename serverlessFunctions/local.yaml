@@ -61,3 +61,12 @@ AddBulkLeads:
         method: post
         path: /addBulkLeads
         cors: false
+
+BuyTwilioPhonesByCode:
+  handler: src/functions/buyTwilioPhonesByCode.handler
+  name: TwilioPhonesByCodeBuyer
+  events:
+    - http:
+        method: post
+        path: /buyTwilioPhonesByCode
+        cors: false

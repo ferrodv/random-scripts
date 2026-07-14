@@ -1,10 +1,11 @@
-import * as path from 'path';
-import * as os from 'os';
+import * as path from "path";
+import * as os from "os";
 import csvToJson from "convert-csv-to-json";
 import request from "../utils/request";
 import response from "../utils/response";
 import JimLeads from "../services/jim/modules/leads.jim";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface AddBulkLeadsPayload {
   apiEndpoint: string;
   authToken: string;
@@ -15,37 +16,44 @@ interface AddBulkLeadsPayload {
 }
 
 export async function handler(event: any) {
-  const { apiEndpoint, authToken, csvFileName, leadStatus, dispoStatus, phone } = request(event.body);
+  const {
+    apiEndpoint,
+    authToken,
+    csvFileName,
+    leadStatus,
+    dispoStatus,
+    phone,
+  } = request(event.body);
 
   try {
-    const csvPath = path.join(os.homedir(), 'Downloads', csvFileName);
-    const leads = csvToJson.fieldDelimiter(',').getJsonFromCsv(csvPath);
-
+    const csvPath = path.join(os.homedir(), "Downloads", csvFileName);
+    const leads = csvToJson.fieldDelimiter(",").getJsonFromCsv(csvPath);
 
     const leadsToAdd: any[] = [];
     const createdLeads: any[] = [];
     const failedLeads: any[] = [];
 
-    leads.forEach(lead => {
-      if (lead['LeadStatus'] === leadStatus && lead['DispoStatus'] === dispoStatus) {
+    leads.forEach((lead) => {
+      if (lead.LeadStatus === leadStatus && lead.DispoStatus === dispoStatus) {
         leadsToAdd.push({
-          email: lead?.['Email'],
-          first_name: lead?.['FirstName'],
-          last_name: lead?.['LastName'],
+          email: lead?.Email,
+          first_name: lead?.FirstName,
+          last_name: lead?.LastName,
           phone,
         });
-      };
+      }
     });
 
-    for (const lead of leadsToAdd) {
+    await leadsToAdd.reduce(async (chain, lead) => {
+      await chain;
       const result = await JimLeads.createLead(lead, apiEndpoint, authToken);
       if (result === null) {
         failedLeads.push(lead);
       } else {
         createdLeads.push(lead);
       }
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }, Promise.resolve());
 
     return response({
       leadsToAddCount: leadsToAdd.length,
@@ -55,7 +63,7 @@ export async function handler(event: any) {
       failedLeadsCount: failedLeads.length,
       failedLeads,
       leadsCount: leads.length,
-      leads
+      leads,
     });
   } catch (e) {
     console.error(e);

@@ -4,18 +4,19 @@ import config from "../../../config";
 export default axios.create({
   baseURL: config.jiraApiEndpoint,
   headers: {
-    "Authorization" : `Bearer ${config.jimAuthToken}`,
+    Authorization: `Bearer ${config.jimAuthToken}`,
     "Content-Type": "application/json",
-    "Accept": "application/json",
-    "UserType": "customer",
+    Accept: "application/json",
+    UserType: "customer",
   },
 });
 
-export const createJimApi = (baseURL: string, token: string) => axios.create({
-  baseURL: baseURL,
-  headers: {
-    "auth_token": token,
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-  },
-});
+export const createJimApi = (baseURL: string, token: string) =>
+  axios.create({
+    baseURL,
+    headers: {
+      auth_token: token,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });

@@ -10,7 +10,7 @@
     "module": "node16",
     "moduleResolution": "node16",
     "esModuleInterop": true,
-    "lib": ["es2017"],
+    "lib": ["es2017", "dom"],
     "rootDir": "./src",
     "resolveJsonModule": true
   }

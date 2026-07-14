@@ -5,7 +5,7 @@ export const jiraProjectsIds = {
 
 export const ClickupSpacesIds = {
   TestJiraSync: "90080246535",
-  Sunlight: "90080298169"
+  Sunlight: "90080298169",
 };
 
 export const jiraClickupMapper = {

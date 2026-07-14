@@ -1,7 +1,6 @@
 import apiTwilio from "../config/api.twilio";
 
 export default class TwilioPhone {
-
   static async GetAllPhones(
     twilioAccountSid: string,
     twilioAuthToken: string,
@@ -11,7 +10,9 @@ export default class TwilioPhone {
       console.log("Could not Get Phone Numbers");
       return null;
     }
-    const token = Buffer.from(`${twilioAccountSid}:${twilioAuthToken}`).toString('base64');
+    const token = Buffer.from(
+      `${twilioAccountSid}:${twilioAuthToken}`
+    ).toString("base64");
     try {
       const config = {
         headers: {
@@ -20,16 +21,13 @@ export default class TwilioPhone {
       };
       let response: any = await apiTwilio.get(
         `/2010-04-01/Accounts/${twilioAccountSid}/IncomingPhoneNumbers.json`,
-        config,
+        config
       );
       let phones: any = response.data.incoming_phone_numbers;
 
-      while (!!response.data.next_page_uri) {
-        response = await apiTwilio.get(
-          response.data.next_page_uri,
-          config,
-        );
-        phones = [...phones, ...response.data.incoming_phone_numbers]
+      while (response.data.next_page_uri) {
+        response = await apiTwilio.get(response.data.next_page_uri, config);
+        phones = [...phones, ...response.data.incoming_phone_numbers];
       }
 
       return phones;
@@ -49,7 +47,9 @@ export default class TwilioPhone {
       console.log("Could not Delete Phone: ", phoneId);
       return null;
     }
-    const token = Buffer.from(`${twilioAccountSid}:${twilioAuthToken}`).toString('base64');
+    const token = Buffer.from(
+      `${twilioAccountSid}:${twilioAuthToken}`
+    ).toString("base64");
     try {
       const response = await apiTwilio.delete(
         `/2010-04-01/Accounts/${twilioAccountSid}/IncomingPhoneNumbers/${phoneId}.json`,
@@ -62,7 +62,10 @@ export default class TwilioPhone {
 
       return phoneId;
     } catch (error) {
-      console.error('Error deleting phone:', error.response?.data || error.message);
+      console.error(
+        "Error deleting phone:",
+        error.response?.data || error.message
+      );
       return null;
     }
   }
