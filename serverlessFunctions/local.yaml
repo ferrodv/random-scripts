@@ -5,7 +5,7 @@ HealthCheck:
     - http:
         method: get
         path: /
-        cors: true
+        cors: false
 
 Playground:
   handler: src/functions/playground.handler
@@ -14,7 +14,7 @@ Playground:
     - http:
         method: post
         path: /playground
-        cors: true
+        cors: false
 
 Sync:
   handler: src/functions/syncClickupJira.handler
@@ -24,7 +24,7 @@ Sync:
     - http:
         method: get
         path: /sync
-        cors: true
+        cors: false
 
 CreateVapiPhone:
   handler: src/functions/vapiSetPhones.handler
@@ -33,7 +33,7 @@ CreateVapiPhone:
     - http:
         method: post
         path: /createVapiPhone
-        cors: true
+        cors: false
 
 DeleteVapiPhone:
   handler: src/functions/vapiDeleteAllPhones.handler
@@ -42,7 +42,7 @@ DeleteVapiPhone:
     - http:
         method: post
         path: /deleteVapiPhones
-        cors: true
+        cors: false
 
 DeleteTwilioPhone:
   handler: src/functions/twilioDeleteAllPhones.handler
@@ -52,3 +52,12 @@ DeleteTwilioPhone:
         method: post
         path: /deleteTwilioPhones
         cors: true
+
+AddBulkLeads:
+  handler: src/functions/addBulkLeads.handler
+  name: bulkLeadsAdder
+  events:
+    - http:
+        method: post
+        path: /addBulkLeads
+        cors: false

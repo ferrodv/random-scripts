@@ -51,19 +51,18 @@ export default class TwilioPhone {
     }
     const token = Buffer.from(`${twilioAccountSid}:${twilioAuthToken}`).toString('base64');
     try {
-      const config = {
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      };
       const response = await apiTwilio.delete(
-        `/2010-04-01/Accounts/${twilioAccountSid}/IncomingPhoneNumbers/${phoneId}`,
-        config,
+        `/2010-04-01/Accounts/${twilioAccountSid}/IncomingPhoneNumbers/${phoneId}.json`,
+        {
+          headers: {
+            Authorization: `Basic ${token}`,
+          },
+        }
       );
 
       return phoneId;
     } catch (error) {
-      console.error(error);
+      console.error('Error deleting phone:', error.response?.data || error.message);
       return null;
     }
   }

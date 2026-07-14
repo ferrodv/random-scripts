@@ -14,5 +14,7 @@ const config = {
   jiraAdminKey: process.env.JIRA_ADMIN_KEY,
   sentryDSN: process.env.SENTRY_DSN,
   tracesSampleRate: process.env.TRACES_SAMPLE_RATE,
+  jimApiEndpoint: process.env.JIM_API_ENDPOINT,
+  jimAuthToken: process.env.JIM_AUTH_TOKEN,
 };
 export default config;
