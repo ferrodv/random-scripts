@@ -47,6 +47,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Deploy to lambda
-        run: yarn deploy
+      # - name: Deploy to lambda
+      #   run: yarn deploy
     
