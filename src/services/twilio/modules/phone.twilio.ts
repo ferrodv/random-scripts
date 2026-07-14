@@ -51,7 +51,7 @@ export default class TwilioPhone {
       `${twilioAccountSid}:${twilioAuthToken}`
     ).toString("base64");
     try {
-      const response = await apiTwilio.delete(
+      await apiTwilio.delete(
         `/2010-04-01/Accounts/${twilioAccountSid}/IncomingPhoneNumbers/${phoneId}.json`,
         {
           headers: {
@@ -64,7 +64,7 @@ export default class TwilioPhone {
     } catch (error) {
       console.error(
         "Error deleting phone:",
-        error.response?.data || error.message
+        (error as any).response?.data || (error as any).message
       );
       return null;
     }

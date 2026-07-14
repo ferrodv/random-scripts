@@ -30,7 +30,7 @@
     "rimraf": "^5.0.0",
     "serverless": "^3.31.0",
     "serverless-dotenv-plugin": "^6.0.0",
-    "serverless-offline": "^12.0.4",
+    "serverless-offline": "11",
     "serverless-webpack": "^5.11.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
